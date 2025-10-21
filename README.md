@@ -1,1 +1,2 @@
-# gaming.lab2
+# lab2-sample
+this istoday's lab
