@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float moveSpeed; //how fast the character moves
+    public Animator anim;
     public float jumpHeight; //how high the character jumps
     //private bool IsFacingRight; //check if player is facing right
     public KeyCode Spacebar; //Jump is the name we gave a keyboard button we chose to be the jump button. In this case, 
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour {
     private bool grounded; //check if the character is standing on solid ground;
     // Use this for initialization
 	void Start () {
+        anim = GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
@@ -50,6 +52,10 @@ public class PlayerController : MonoBehaviour {
                 GetComponent<SpriteRenderer>().flipX = false;
             }   
         }
+
+anim.SetFloat("Height", GetComponent<Rigidbody2D>().velocity.y);
+anim.SetFloat("speeed", Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x));
+        anim.SetBool("Grounded", grounded);   
     }
 
     void FixedUpdate()
@@ -61,6 +67,7 @@ public class PlayerController : MonoBehaviour {
     void Jump()
     {
         GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpHeight); //player character jumps 
-        //vertically along the y-axis without disrupting horizontal walk      
+        //vertically along the y-axis without disrupting horizontal walk  
+         
     }
 }
